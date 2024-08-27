@@ -6,12 +6,12 @@ const cors=require('cors')
 app.use(cors()) 
 
 //Routes
- const studentRoutes=require('./routes/student.route')
- const adminRoutes=require('./routes/admin.route')
- const teacherRoutes=require('./routes/teacher.route')
- const loginRoutes=require('./routes/login.route')
- const principleRoutes=require('./routes/principal.route')
- const {verifyToken,isAdmin,isStudent,isTeacher,isPrinciple}=require('./middlewares/authorization')
+const studentRoutes=require('./routes/student.route')
+const adminRoutes=require('./routes/admin.route')
+const teacherRoutes=require('./routes/teacher.route')
+const loginRoutes=require('./routes/login.route')
+const principleRoutes=require('./routes/principal.route')
+const {verifyToken,isAdmin,isStudent,isTeacher,isPrinciple}=require('./middlewares/authorization')
 
 //mongDB connection
 const mongoose=require('mongoose')

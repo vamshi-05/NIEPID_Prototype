@@ -112,9 +112,6 @@ function Login() {
               />
             </div>
             <button type="submit" style={styles.button}>Submit</button>
-            <span style={styles.span}>
-              
-            </span>
           </form>
         </div>
       </div>
