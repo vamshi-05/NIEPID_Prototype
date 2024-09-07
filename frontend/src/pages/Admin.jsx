@@ -54,9 +54,9 @@ function App() {
 
 
     const handleDownloadTeachers = async () => {
-        try {
-            console.log("Attempting to download file");
-            console.log(`Bearer ${localStorage.getItem("token")}`);
+        // try {
+            // console.log("Attempting to download file");
+            // console.log(`Bearer ${localStorage.getItem("token")}`);
 
             const response = await axios.get('http://localhost:4000/admin/download', {
                 headers: {
@@ -66,6 +66,8 @@ function App() {
                 responseType: 'blob', // Important
                 maxRedirects: 0, // Do not follow redirects
             });
+
+            console.log(response)
 
             // Check if the response status is 200 OK
             if (response.status === 200) {
@@ -80,9 +82,9 @@ function App() {
             } else {
                 console.error(`Unexpected response status: ${response.status}`);
             }
-        } catch (error) {
-            console.error('Error downloading the file', error);
-        }
+        // } catch (error) {
+        //     console.error('Error downloading the file', error);
+        // }
     };
 
     const handleRegister = async (e) => {

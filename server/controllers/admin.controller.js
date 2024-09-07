@@ -151,34 +151,53 @@ const registerTeacher = async (req, res) => {
         console.log('Extracted data:', data);
 
         const newData = data.map(async (row) => {
-            const teacher = {
-                teacherId: row.teacherId,
-                teacherName: row.teacherName,
-                teacherMNo: row.teacherMNo,
-                email: row.email,
-                classId: row.classId.split(',')
-            }
-            teacher.classId.map(async (classid) => {
-                const demoClass = {
-                    classId: classid,
-                    teacherId: teacher.teacherId,
-                    section: classid.split('_')[0],
-                    year: classid.split('_')[1],
-                    student: []
+
+            const isTeacher = await teacherModel.find({ 'teacherId' : row.teacherId})
+            const isUser = await userModel.find({'id' : row.teacherId})
+
+            console.log(isTeacher,"----->----->----->----->",isUser);
+
+            if (isTeacher.length == 0 && isUser.length == 0) {
+
+                const no = row.classId.indexOf(",");
+                const cid = []
+                if(no != -1)
+                    row.classId.split(',').map((id)=>{
+                        cid.push(id);
+                    })
+                else{
+                    cid.push(row.classId);
                 }
-                await classModel.create(demoClass)
-            })
 
-            await teacherModel.create(teacher)
+                const teacher = {
+                    teacherId: row.teacherId,
+                    teacherName: row.teacherName,
+                    teacherMNo: row.teacherMNo,
+                    email: row.email,
+                    classId: cid,
+                }
 
-            // console.log(typeof(row.classId))
+                teacher.classId.map(async (classid) => {
+                    const demoClass = {
+                        classId: classid,
+                        teacherId: teacher.teacherId,
+                        section: classid.split('_')[0],
+                        year: classid.split('_')[1],
+                        student: []
+                    }
+                    await classModel.create(demoClass)
+                })
 
-            const user = {
-                id: row.teacherId,
-                password: row.teacherId,
-                role: 'teacher'
+                await teacherModel.create(teacher)
+
+
+                const user = {
+                    id: row.teacherId,
+                    password: row.teacherId,
+                    role: 'teacher'
+                }
+                await userModel.create(user)
             }
-            await userModel.create(user)
         })
 
         // console.log(newData)
@@ -242,7 +261,7 @@ const downloadExcel = async (req, res) => {
     console.log("hii")
     const file = await path.join(__dirname, '..', 'samplesheets', 'sampleDataTeacher.xlsx'); // Adjust the path to your file
     console.log("File path:", file); // Log the file path for debugging
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000'); // Set the CORS header for this route
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Set the CORS header for this route
     res.download(file, (err) => {
         if (err) {
             console.error("File not found:", err);
@@ -250,6 +269,7 @@ const downloadExcel = async (req, res) => {
         }
     });
 };
+
 const getTeacher = async (req, res) => {
     const { classId } = req.params;
 
