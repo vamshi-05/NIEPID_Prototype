@@ -2,13 +2,35 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import niepidLogo from './th.jpeg';
 
 function Login() {
   const [cookies] = useCookies([]);
   const navigate = useNavigate();
   useEffect(() => {
+    const role = localStorage.getItem("role")
+    if(role==="admin"){
+      //navigate('/admin', { replace: true });
+      //navigate("/admin");
+      window.open('/admin', '_self');
+      return;
+    }
+    else if(role==="teacher"){
+      window.open('/teacher', '_self');
+      return;
+    }
+    else if(role==="student"){
+      window.open('/student', '_self');
+      return;
+    }
+    else if(role==="principle"){
+      window.open('/principle', '_self');
+      return;
+    }
+    else{
+      // generateError("Invalid Credentials");
+    }
     if (cookies.jwt) {
       navigate("/");
     }
@@ -22,34 +44,31 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const id=values.id
-      const password=values.password
-      console.log(id,password)
-      const  response  = await axios.post(
-        "https://niepid-final.onrender.com/login",
+      const id = values.id
+      const password = values.password
+      console.log(id, password)
+      const response = await axios.post("http://localhost:4000/login",
         {
-         
-            id: id,
-            password: password
+          id: id,
+          password: password
         }
-       
       );
-      if (response.data.status==="success") {
-        const data=response.data
+      if (response.data.status === "success") {
+        const data = response.data
         console.log(response);
         console.log(data.role);
-        localStorage.setItem("userId",data.userId)
-        localStorage.setItem("role",data.role);
-        localStorage.setItem("token",data.token);
-        if(data.role==="admin"){
+        localStorage.setItem("userId", data.userId)
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("token", data.token);
+        if (data.role === "admin") {
           navigate("/admin");
           return;
         }
-        else if(data.role==="teacher"){
+        else if (data.role === "teacher") {
           navigate("/teacher");
           return;
         }
-        else if(data.role==="student"){
+        else if (data.role === "student") {
           navigate("/student");
           return;
         }
@@ -58,15 +77,15 @@ function Login() {
           return;
         }
       }
-      else{
-          generateError("Invalid Credentials");
-          return null;
+      else {
+        generateError("Invalid Credentials");
+        return null;
       }
     } catch (ex) {
       console.log(ex);
     }
   };
-  
+
   return (
     <div>
       <header style={headerStyles.header}>

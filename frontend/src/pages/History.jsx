@@ -70,7 +70,8 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
-    }
+        marginLeft: "1rem",
+    },
 };
 
 // const Header = () => (
@@ -108,7 +109,11 @@ const StudentPerformance = () => {
                 <img src={image} alt="Logo" style={styles.logoImage} />
                 <span style={styles.logoLabel}>NIEPID</span>
             </div>
-            <button onClick={() => {
+            <div>
+                <button onClick={handlePrint} style={styles.backButton}>
+                    Print
+                </button>
+                <button onClick={() => {
                     const role = localStorage.getItem("role");
                     if (role === "student")
                         navigate('/student')
@@ -119,8 +124,14 @@ const StudentPerformance = () => {
                     if (role === "admin")
                         navigate('/admin/viewstudents')
                 }} style={styles.backButton}>Back</button>
+            </div>
         </header>
     );
+
+    const handlePrint = (e) => {
+        window.print()
+    }
+
     const Footer = () => (
         <footer style={styles.footer}>&copy; 2024 Student History Portal</footer>
     );
@@ -128,34 +139,34 @@ const StudentPerformance = () => {
         console.log("hello")
         if (role === "teacher") {
             console.log("hello")
-            await axios.get("https://niepid-final.onrender.com/teacher/abc", {
+            await axios.get("http://localhost:4000/teacher/abc", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
-            .then(res => {
-                // console.log(res)
-                if (res.status != 200) {
-                    toast.error("Student is still in 1st Year", {
-                        position: "top-right",
-                    });
-                    navigate('/teacher')
-                }
-                console.log(res)
-                setStudentInfo(res.data)
-                
-            })
-            .catch(err => {
-                console.log(err)
-                console.log(err.response)
-            })
-        } 
+                .then(res => {
+                    // console.log(res)
+                    if (res.status != 200) {
+                        toast.error("Student is still in 1st Year", {
+                            position: "top-right",
+                        });
+                        navigate('/teacher')
+                    }
+                    console.log(res)
+                    setStudentInfo(res.data)
+
+                })
+                .catch(err => {
+                    console.log(err)
+                    console.log(err.response)
+                })
+        }
         else if (role === "principle") {
             console.log(role)
             console.log(id)
-            axios.get("https://niepid-final.onrender.com/principle/student/viewHistory", {
+            axios.get("http://localhost:4000/principle/student/viewHistory", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
@@ -176,9 +187,9 @@ const StudentPerformance = () => {
                 .catch(err => {
                     console.log(err.response)
                 })
-        } 
+        }
         else if (role === "admin") {
-            axios.get("https://niepid-final.onrender.com/admin/student/viewHistory", {
+            axios.get("http://localhost:4000/admin/student/viewHistory", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
@@ -198,11 +209,11 @@ const StudentPerformance = () => {
                 .catch(err => {
                     //console.log(err.response)
                 })
-        }else if(role === "student"){
+        } else if (role === "student") {
             console.log("student")
             const id1 = localStorage.getItem('regNo')
             console.log(id1)
-            axios.get("https://niepid-final.onrender.com/student/viewHistory", {
+            axios.get("http://localhost:4000/student/viewHistory", {
                 headers: {
                     id: id1,
                     "Content-Type": "application/json",

@@ -192,14 +192,14 @@ const Occupational = () => {
             <button onClick={() => navigate('/teacher/eval')} style={styles.backButton}>Back</button>
         </header>
     )
-    
+
     useEffect(async () => {
         console.log(term, currTerm)
         console.log(year, currYear)
         console.log(section, currSection)
         const id = localStorage.getItem("studentId")
         console.log(id)
-        const data = await axios.get("https://niepid-final.onrender.com/teacher/evaluate/questions", {
+        const data = await axios.get("http://localhost:4000/teacher/evaluate/questions", {
             headers: {
                 id: id,
                 "Content-Type": "application/json",
@@ -282,7 +282,7 @@ const Occupational = () => {
         };
         // console.log('Submitting data:', submissionData);
         const id = localStorage.getItem("studentId")
-        await axios.post("https://niepid-final.onrender.com/teacher/eval/form", {
+        await axios.post("http://localhost:4000/teacher/eval/form", {
             type: "occupationalQA",
             id: id,
             section: section,
@@ -302,7 +302,7 @@ const Occupational = () => {
                 console.log(err.response)
             })
 
-        axios.get("https://niepid-final.onrender.com/teacher/evaluate", {
+        axios.get("http://localhost:4000/teacher/evaluate", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -338,7 +338,7 @@ const Occupational = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("https://niepid-final.onrender.com/teacher/termTypeComment", {
+        axios.post("http://localhost:4000/teacher/termTypeComment", {
             section: section,
             year: year,
             term: term,
@@ -363,7 +363,7 @@ const Occupational = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <form className={classes.registrationForm} onSubmit={handleSubmit}>
                 <div className={classes.title}>Functional Assessment Checklist For Programming</div>
                 <div className={classes.title}>Occupational</div>

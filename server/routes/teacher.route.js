@@ -2,6 +2,9 @@ const express=require('express')
 const routes=express.Router()
 const { historyStudent,evaluateStudent,getStudents,getQuestions,getTeacher,getStudentbyId,submitForm,submitTermTypeComment,evaluateYearStudent,submitYearTypeComment } = require('../controllers/teacher.controller')
 
+const {viewDetails} = require('../controllers/student.controller');
+routes.get('/viewStudentDetails',viewDetails);
+
 routes.get('/hist1',historyStudent)
 routes.get('/abc',historyStudent)
 routes.get('/evaluate',evaluateStudent)

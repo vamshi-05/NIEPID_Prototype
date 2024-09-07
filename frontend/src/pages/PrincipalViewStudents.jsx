@@ -60,7 +60,7 @@ const PrincipalViewStudents = () => {
     const fetchStudentDetails = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://niepid-final.onrender.com/principle/viewstudents', {
+            const response = await axios.get('http://localhost:4000/principle/viewstudents', {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -81,7 +81,7 @@ const PrincipalViewStudents = () => {
     const fetchTeacherDetails = async (classId) => {
         try {
             console.log("Hello")
-            const response = await axios.get(`https://niepid-final.onrender.com/principle/teacher/${classId}`, {
+            const response = await axios.get(`http://localhost:4000/principle/teacher/${classId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -137,15 +137,19 @@ const PrincipalViewStudents = () => {
         setSearchValues(searchValues => ({ ...searchValues, [name]: value }));
     };
 
+    const handlePrint = (e) =>{
+        window.print()
+    }
+
     const showHistory = (studentId) => {
         console.log(studentId)
-        localStorage.setItem("studentId",studentId)
+        localStorage.setItem("studentId", studentId)
 
         navigate(`/principle/viewstudents/history/${studentId}`);
     };
 
-    const showDetails=(studentId)=>{
-        localStorage.setItem("regNo",studentId)
+    const showDetails = (studentId) => {
+        localStorage.setItem("regNo", studentId)
         navigate(`/principle/viewstudents/details/${studentId}`);
 
     }
@@ -169,7 +173,7 @@ const PrincipalViewStudents = () => {
 
     return (
         <div>
-            <Header/>
+            <Header />
             <div style={styles.container}>
                 <h1 style={styles.heading}>Student Details</h1>
                 <table style={styles.table}>
@@ -234,6 +238,11 @@ const PrincipalViewStudents = () => {
                     </tbody>
                 </table>
             </div>
+            <div style={styles.print}>
+                <button onClick={handlePrint}  style={styles.backButton}>
+                    Print
+                </button>
+            </div>
             <footer style={footerStyles.footer}>
                 <p>&copy; 2023 Our Website. All rights reserved.</p>
             </footer>
@@ -284,7 +293,7 @@ const styles = {
         color: '#ffffff',
         fontWeight: 'bold',
         fontSize: '16px',
-        position: 'sticky',
+        // position: 'sticky',
         top: '0',
         zIndex: '1',
     },
@@ -363,21 +372,26 @@ const styles = {
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
     },
+    print: {
+        display: "flex",
+        justifyContent: "center",
+        marginBottom: "1rem",
+    }
 };
 
 const footerStyles = {
     footer: {
-      backgroundColor: '#007bff',
-      padding: '1rem',
-      textAlign: 'center',
-      color: '#ffffff',
-      position: 'relative',
-      bottom: 0,
-      width: '100%',
+        backgroundColor: '#007bff',
+        padding: '1rem',
+        textAlign: 'center',
+        color: '#ffffff',
+        position: 'relative',
+        bottom: 0,
+        width: '100%',
     },
     text: {
-      margin: 0,
+        margin: 0,
     }
-  };
+};
 
 export default PrincipalViewStudents;

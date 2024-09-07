@@ -16,23 +16,27 @@ const TeacherTable = () => {
 
     // Fetch the role from localStorage
     const role = localStorage.getItem('role');
-    role === "admin" ?console.log("calling as admin"):console.log("calling as pricipal")
+    role === "admin" ? console.log("calling as admin") : console.log("calling as pricipal")
 
     const fetchData = async () => {
         try {
-            const response = role === "admin" ? await axios.get('https://niepid-final.onrender.com/admin/viewTeacher', {
+            const response = role === "admin" ? await axios.get('http://localhost:4000/admin/viewTeacher', {
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem("token")}`
-                }},
-                {withCredentials: true
-            }) : await axios.get('https://niepid-final.onrender.com/principle/viewTeacher', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem("token")}`
-                }},
-                {withCredentials: true
-            })
+                }
+            },
+                {
+                    withCredentials: true
+                }) : await axios.get('http://localhost:4000/principle/viewTeacher', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                },
+                    {
+                        withCredentials: true
+                    })
             setTeacherDetails(response.data.data);
         } catch (error) {
             console.error('Error fetching teacher details:', error.message);
@@ -57,14 +61,16 @@ const TeacherTable = () => {
             }
 
             const response = await axios.put(
-                `https://niepid-final.onrender.com/admin/updateTeacher/${id}`,
+                `http://localhost:4000/admin/updateTeacher/${id}`,
                 updatedTeacher,
                 {
                     headers: {
                         'Content-Type': 'application/json',
                         authorization: `Bearer ${localStorage.getItem("token")}`
-                    }},
-                {withCredentials: true
+                    }
+                },
+                {
+                    withCredentials: true
                 }
             );
 
@@ -99,13 +105,17 @@ const TeacherTable = () => {
         }
     };
     //navigate('/principle')108
-    
+
+    const handlePrint = (e) =>{
+        window.print()
+    }
+
     const navigate = useNavigate()
 
-    const handleNavigate = ()=>{
-        if(role == 'admin'){
+    const handleNavigate = () => {
+        if (role == 'admin') {
             navigate('/admin')
-        }else if (role == 'principle'){
+        } else if (role == 'principle') {
             navigate('/principle')
         }
     }
@@ -113,11 +123,11 @@ const TeacherTable = () => {
     const Header = () => (
         <header style={styles.header}>
             <div style={styles.logo}>
-                <img  src={image} alt="Logo" style={styles.logoImage} />
+                <img src={image} alt="Logo" style={styles.logoImage} />
                 <span style={styles.logoLabel}>NIEPID</span>
             </div>
             <nav style={styles.navLinks}>
-                <button onClick={() => {handleNavigate()}} style={styles.backButton}>
+                <button onClick={() => { handleNavigate() }} style={styles.backButton}>
                     Back
                 </button>
             </nav>
@@ -150,7 +160,7 @@ const TeacherTable = () => {
     }
     return (
         <>
-            <Header/>
+            <Header />
             <div style={styles.container}>
                 <h1 style={styles.heading}>Teacher Details</h1>
                 <table style={styles.table}>
@@ -223,6 +233,11 @@ const TeacherTable = () => {
                     </tbody>
                 </table>
             </div>
+            <div style={styles.print}>
+                <button onClick={handlePrint}  style={styles.backButton}>
+                    Print
+                </button>
+            </div>
             <footer style={footerStyles.footer}>
                 <p>&copy; 2023 Our Website. All rights reserved.</p>
             </footer>
@@ -261,7 +276,7 @@ const styles = {
         color: '#ffffff',
         fontWeight: 'bold',
         fontSize: '16px',
-        position: 'sticky',
+        // position: 'sticky',
         top: '0',
         zIndex: '1'
     },
@@ -332,21 +347,26 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
+    },
+    print:{
+            display:"flex",
+            justifyContent:"center",
+            marginBottom:"1rem",
     }
 };
 
 const footerStyles = {
     footer: {
-      backgroundColor: '#007bff',
-      padding: '1rem',
-      textAlign: 'center',
-      color: '#ffffff',
-      position: 'relative',
-      bottom: 0,
-      width: '100%',
+        backgroundColor: '#007bff',
+        padding: '1rem',
+        textAlign: 'center',
+        color: '#ffffff',
+        position: 'relative',
+        bottom: 0,
+        width: '100%',
     },
     text: {
-      margin: 0,
+        margin: 0,
     }
 };
 

@@ -23,23 +23,23 @@ export default function Home() {
     localStorage.removeItem("year")
     localStorage.removeItem("term")
     localStorage.removeItem("studentId")
-    
+
     const teacherId = localStorage.getItem("userId")
     console.log("hiiii")
-    axios.get('https://niepid-final.onrender.com/teacher/getStudents', {
+    axios.get('http://localhost:4000/teacher/getStudents', {
       headers: {
         id: teacherId,
         // id:"t2",
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       }
-    }, { withCredentials: true }) 
+    }, { withCredentials: true })
       .then(res => {
         console.log(res.data.students)
         setStudents(res.data.students)
-        
+
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err.response)
       })
 
@@ -47,7 +47,7 @@ export default function Home() {
     // setStudents(groupedStudents);
     // console.log(students)
 
-    axios.get('https://niepid-final.onrender.com/teacher/getTeacher', {
+    axios.get('http://localhost:4000/teacher/getTeacher', {
       headers: {
         id: teacherId,
         // id:"t2",

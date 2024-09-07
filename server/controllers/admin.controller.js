@@ -18,13 +18,13 @@ const editTeacher = async (req, res) => {
     const { teacherId, teacherName, email, teacherMNo, classId } = req.body;
 
     try {
-        const existedTeacher=await teacherModel.findById(id);
+        const existedTeacher = await teacherModel.findById(id);
         const updatedTeacher = await teacherModel.findByIdAndUpdate(
             id,
             { teacherId, teacherName, email, teacherMNo, classId },
             { new: true }
         );
-        const updateUser= await userModel.findOneAndUpdate({"id": existedTeacher.teacherId},{"id" : teacherId});
+        const updateUser = await userModel.findOneAndUpdate({ "id": existedTeacher.teacherId }, { "id": teacherId });
         if (!updatedTeacher || !updateUser) {
             return res.status(404).json({ msg: 'Teacher not found' });
         }
@@ -42,25 +42,24 @@ const registerStudent = async (req, res) => {
         const data = req.body
         // console.log(data.formData.details.info.regNo)
         // console.log(data.formData.details.info)
-        const arr1 = await studentDetailsModel.findOne({'info.regNo':data.formData.details.info.regNo})
-        const arr2 = await studentModel.findOne({regNo:data.formData.details.info.regNo})
+        const arr1 = await studentDetailsModel.findOne({ 'info.regNo': data.formData.details.info.regNo })
+        const arr2 = await studentModel.findOne({ regNo: data.formData.details.info.regNo })
         // console.log("hello")
         // console.log(arr1.length)
         // console.log(arr1+"  "+arr2+" "+"hello")
-        lable1: if (!arr1 && !arr2){
+        lable1: if (!arr1 && !arr2) {
             let flag = false
             // console.log('namaste')
             // console.log(data.formData.details)
-            if(data.formData.details.info.regNo)
-            {
-            const responce1 = await new studentDetailsModel(data.formData.details).save()
-                .then(() => {
-                    console.log("data entered in studentDetailsModel successfully")
-                })
-                .catch((err) => {
-                    // console.log(err)
-                    flag = true
-                })
+            if (data.formData.details.info.regNo) {
+                const responce1 = await new studentDetailsModel(data.formData.details).save()
+                    .then(() => {
+                        console.log("data entered in studentDetailsModel successfully")
+                    })
+                    .catch((err) => {
+                        // console.log(err)
+                        flag = true
+                    })
             }
             if (flag) {
                 res.status(405).json({ reason: "studentDetails already exists" })
@@ -74,7 +73,7 @@ const registerStudent = async (req, res) => {
             if (!arr3) {
                 res.status(404).json({ reason: "no class exists" })
                 break lable1
-            } else{
+            } else {
                 const v1 = arr3.student
                 v1.push(data.formData.details.info.regNo)
                 // console.log(v1)
@@ -109,7 +108,7 @@ const registerStudent = async (req, res) => {
                         console.log("student has been saved in userDB")
                     })
                     .catch((err) => {
-                        console.log("student has not been saved in userDB \n"+err)
+                        console.log("student has not been saved in userDB \n" + err)
                         flag = true
                         console.log(ans)
                     })
@@ -243,7 +242,7 @@ const downloadExcel = async (req, res) => {
     console.log("hii")
     const file = await path.join(__dirname, '..', 'samplesheets', 'sampleDataTeacher.xlsx'); // Adjust the path to your file
     console.log("File path:", file); // Log the file path for debugging
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Set the CORS header for this route
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000'); // Set the CORS header for this route
     res.download(file, (err) => {
         if (err) {
             console.error("File not found:", err);

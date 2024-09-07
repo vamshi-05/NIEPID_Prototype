@@ -5,6 +5,9 @@ const { registerStudent, registerTeacher, viewStudent, viewTeacher, downloadExce
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage })
 
+const {viewDetails} = require('../controllers/student.controller');
+routes.get('/viewStudentDetails',viewDetails);
+
 routes.put('/updateTeacher/:id', editTeacher)
 routes.post('/registertudent', registerStudent);
 routes.post('/registerTeacher', upload.single('file'), registerTeacher);
@@ -12,6 +15,6 @@ routes.get('/viewstudents', viewStudent);
 routes.get('/viewTeacher', viewTeacher);
 routes.get('/student/viewHistory',viewHistory)
 routes.get('/download', downloadExcel);
-routes.get('/teacher/:classId', getTeacher)
+routes.get('/teacher/:classId', getTeacher);
 
 module.exports = routes

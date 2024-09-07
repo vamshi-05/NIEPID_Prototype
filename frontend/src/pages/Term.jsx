@@ -7,13 +7,13 @@ const Term = () => {
   const navigate = useNavigate();
   const [sections, setSections] = useState([]);
   const [years, setYears] = useState([]);
-  
+
 
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
         const id = localStorage.getItem("studentId");
-        const res = await axios.get("https://niepid-final.onrender.com/teacher/getStudentbyId", {
+        const res = await axios.get("http://localhost:4000/teacher/getStudentbyId", {
           headers: {
             id: id,
             "Content-Type": "application/json",
@@ -25,14 +25,14 @@ const Term = () => {
         localStorage.setItem("currYear", student.currYear);
         localStorage.setItem("currSection", student.currSection);
         const arr = []
-        student.section.map((inst)=>{
+        student.section.map((inst) => {
           arr.push(inst.sec)
         })
         setSections(arr)
       } catch (err) {
         console.error("Error fetching student data", err.response);
       }
-      
+
     };
 
     fetchStudentData();
@@ -50,7 +50,7 @@ const Term = () => {
       setYears([]);
       localStorage.setItem("section", section);
       const id = localStorage.getItem("studentId");
-      const res = await axios.get("https://niepid-final.onrender.com/teacher/getStudentbyId", {
+      const res = await axios.get("http://localhost:4000/teacher/getStudentbyId", {
         headers: {
           id: id,
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const Term = () => {
       const data = res.data;
       const secIndex = data.section.findIndex(sec => sec.sec === section);
       const yr = []
-      data.section[secIndex].yearReport.map(year=>{
+      data.section[secIndex].yearReport.map(year => {
         yr.push(year.year)
       })
       setYears(yr)
@@ -98,15 +98,15 @@ const Term = () => {
             <button key={section} onClick={() => handleSection(section)} style={styles.termButton}>{section}</button>
           ))}
         </div>
-        <div style={styles.buttonContainer}> 
+        <div style={styles.buttonContainer}>
           {years.map((year) => (
             <button key={year} onClick={() => handleYear(year)} style={styles.termButton}>Year {year}</button>
           ))}
         </div>
       </div>
       <footer style={styles.footer}>
-                <p style={styles.footerText}>&copy; 2024 Functional Assessment. All rights reserved.</p>
-            </footer>
+        <p style={styles.footerText}>&copy; 2024 Functional Assessment. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

@@ -51,7 +51,7 @@ const Front = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("https://niepid-final.onrender.com/teacher/getStudentbyId", {
+                const res = await axios.get("http://localhost:4000/teacher/getStudentbyId", {
                     headers: {
                         id: id,
                         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Front = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post("https://niepid-final.onrender.com/teacher/yearTypeComment", {
+            await axios.post("http://localhost:4000/teacher/yearTypeComment", {
                 id: id,
                 section: section,
                 year: year,
@@ -149,9 +149,9 @@ const Front = () => {
             {/* <label style={{alignSelf:'center',fontSize:'35px',fontFamily:'cursive',fontWeight:'bold'}}>{(percent.personalPercent + percent.academicPercent + percent.occupationalPercent + percent.socialPercent)/4 > 80 ? "Pass" : "Fail"}</label>
             <br/> */}
             <div style={styles.box}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <label>Enter your comments for Year</label>
-                    <label>Year Percent : {(percent.personalPercent + percent.academicPercent + percent.occupationalPercent + percent.socialPercent)/4}</label>
+                    <label>Year Percent : {(percent.personalPercent + percent.academicPercent + percent.occupationalPercent + percent.socialPercent) / 4}</label>
                 </div>
                 <textarea
                     name="comments1"
@@ -372,7 +372,7 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
-      }
+    }
 };
 
 export default Front;

@@ -60,12 +60,12 @@ const ViewStudents = () => {
     const fetchStudentDetails = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://niepid-final.onrender.com/admin/viewstudents', {//'https://niepid-final.onrender.com/principle/student1'
+            const response = await axios.get('http://localhost:4000/admin/viewstudents', {//'http://localhost:4000/principle/student1'
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 },
-                
+
             });
 
             setStudentDetails(response.data.data);
@@ -81,7 +81,7 @@ const ViewStudents = () => {
     const fetchTeacherDetails = async (classId) => {
         try {
             console.log("Hello")
-            const response = await axios.get(`https://niepid-final.onrender.com/admin/teacher/${classId}`, {
+            const response = await axios.get(`http://localhost:4000/admin/teacher/${classId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -137,21 +137,25 @@ const ViewStudents = () => {
         setSearchValues(searchValues => ({ ...searchValues, [name]: value }));
     };
 
+    const handlePrint = (e) =>{
+        window.print()
+    }
+
     const showHistory = (studentId) => {
         console.log(studentId)
-        localStorage.setItem("studentId",studentId)
+        localStorage.setItem("studentId", studentId)
 
         navigate(`/admin/viewstudents/history/${studentId}`);
     };
 
-    const showDetails=(studentId)=>{
-        localStorage.setItem("regNo",studentId)
+    const showDetails = (studentId) => {
+        localStorage.setItem("regNo", studentId)
         navigate(`/admin/viewstudents/details/${studentId}`);
     }
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    
+
     const Header = () => (
         <header style={styles.header}>
             <div style={styles.logo}>
@@ -168,7 +172,7 @@ const ViewStudents = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div style={styles.container}>
                 <h1 style={styles.heading}>Student Details</h1>
                 <table style={styles.table}>
@@ -233,6 +237,11 @@ const ViewStudents = () => {
                     </tbody>
                 </table>
             </div>
+            <div style={styles.print}>
+                <button onClick={handlePrint}  style={styles.backButton}>
+                    Print
+                </button>
+            </div>
             <footer style={footerStyles.footer}>
                 <p>&copy; 2023 Our Website. All rights reserved.</p>
             </footer>
@@ -241,8 +250,8 @@ const ViewStudents = () => {
 };
 
 const styles = {
-    div:{
-        display:'flex',
+    div: {
+        display: 'flex',
     },
     container: {
         padding: '20px',
@@ -283,7 +292,7 @@ const styles = {
         color: '#ffffff',
         fontWeight: 'bold',
         fontSize: '16px',
-        position: 'sticky',
+        // position: 'sticky',
         top: '0',
         zIndex: '1',
     },
@@ -311,7 +320,7 @@ const styles = {
         borderRadius: '4px',
         cursor: 'pointer',
         transition: 'background-color 0.3s',
-        margin:'5px'
+        margin: '5px'
     },
     buttonHover: {
         backgroundColor: '#005bb5'
@@ -362,21 +371,26 @@ const styles = {
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
     },
+    print: {
+        display: "flex",
+        justifyContent: "center",
+        marginBottom: "1rem",
+    }
 };
 
 const footerStyles = {
     footer: {
-      backgroundColor: '#007bff',
-      padding: '1rem',
-      textAlign: 'center',
-      color: '#ffffff',
-      position: 'relative',
-      bottom: 0,
-      width: '100%',
+        backgroundColor: '#007bff',
+        padding: '1rem',
+        textAlign: 'center',
+        color: '#ffffff',
+        position: 'relative',
+        bottom: 0,
+        width: '100%',
     },
     text: {
-      margin: 0,
+        margin: 0,
     }
-  };
+};
 
 export default ViewStudents;

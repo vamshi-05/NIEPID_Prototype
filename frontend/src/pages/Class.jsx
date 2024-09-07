@@ -13,14 +13,14 @@ function Class() {
   const [UInfo, setUInfo] = useState(null);
 
   useEffect(() => {
-    
+
 
     const verifyUser = async () => {
       if (!cookies.jwt) {
         navigate("/login");
       } else {
         const { data } = await axios.post(
-          "https://niepid-final.onrender.com/class",
+          "http://localhost:4000/class",
           {},
           {
             withCredentials: true,
@@ -38,13 +38,13 @@ function Class() {
   }, [cookies, navigate, removeCookie]);
 
   useEffect(() => {
-    
+
     getDetails();
   }, []);
   async function getDetails() {
     try {
       await axios
-        .post("https://niepid-final.onrender.com/getassignedstudents",{},{
+        .post("http://localhost:4000/getassignedstudents", {}, {
           withCredentials: true,
         })
         .then((response) => {
@@ -74,7 +74,7 @@ function Class() {
       formData.append("file", selectedFile);
       let response;
       response = await axios.post(
-        "https://niepid-final.onrender.com/addstudents",
+        "http://localhost:4000/addstudents",
         formData,
         {
           headers: {

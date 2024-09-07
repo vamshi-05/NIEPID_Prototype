@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -11,7 +11,7 @@ function Student() {
     const regNo = localStorage.getItem("userId")
     const [formData, setFormData] = useState({
         regNo: '',
-        regDate:"",
+        regDate: "",
         dob: '',
         name: '',
         sex: '',
@@ -25,40 +25,40 @@ function Student() {
     });
     useEffect(() => {
         const fetchStudentData = async () => {
-          try {
-            console.log("hello")
-            const res = await axios.get("https://niepid-final.onrender.com/student/viewDetail", {
-              headers: {
-                regNo: regNo,
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              }
-            }, { withCredentials: true });
-            const details = res.data;
-            console.log(res)
-            localStorage.setItem('regNo',res.data.info.regNo)
-            setFormData({
-                regNo: details.info.regNo,
-                regDate:(details.info.regDate).toString(),
-                dob: (details.info.dob).toString(),
-                name: details.info.name,
-                sex: details.info.sex,
-                informant: details.info.information,
-                education: details.info.education,
-                referredBy: details.info.refBy,
-                occupation: details.info.occupation,
-                aadhar: (details.info.aadharNo).toString(),
-                paymentType: details.info.paymentType,
-                mobile: details.info.mobileNo,
-            })
-            console.log(details)
-          } catch (err) {
-            console.log(err)
-            console.error("Error fetching student data", err.response);
-          }
+            try {
+                console.log("hello")
+                const res = await axios.get("http://localhost:4000/student/viewStudentDetails", {
+                    headers: {
+                        regNo: regNo,
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    }
+                }, { withCredentials: true });
+                const details = res.data;
+                console.log(res)
+                localStorage.setItem('regNo', res.data.info.regNo)
+                setFormData({
+                    regNo: details.info.regNo,
+                    regDate: (details.info.regDate).toString(),
+                    dob: (details.info.dob).toString(),
+                    name: details.info.name,
+                    sex: details.info.sex,
+                    informant: details.info.information,
+                    education: details.info.education,
+                    referredBy: details.info.refBy,
+                    occupation: details.info.occupation,
+                    aadhar: (details.info.aadharNo).toString(),
+                    paymentType: details.info.paymentType,
+                    mobile: details.info.mobileNo,
+                })
+                console.log(details)
+            } catch (err) {
+                console.log(err)
+                console.error("Error fetching student data", err.response);
+            }
         };
         fetchStudentData();
-      }, []);
+    }, []);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -81,7 +81,7 @@ function Student() {
 
     const handleLogout = () => {
         console.log('Logout logic here');
-        localStorage.removeItem('details')
+        localStorage.clear()
         navigate("/")
     };
 
@@ -107,8 +107,8 @@ function Student() {
                             </div>
                         ))}
                         <div style={styles.buttonsContainer}>
-                            <button style={styles.button } onClick={()=>{ navigate("/student/details")}}>Details</button>
-                            <button style={styles.button} onClick={()=>{navigate("/student/history")}}>History</button>
+                            <button style={styles.button} onClick={() => { navigate("/student/details") }}>Details</button>
+                            <button style={styles.button} onClick={() => { navigate("/student/history") }}>History</button>
                         </div>
                     </form>
                 </div>

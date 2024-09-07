@@ -4,6 +4,8 @@ const { viewStudent, viewTeacher, getTeacher, searchStudent,viewHistory } = requ
 const { route } = require('./student.route');
 //const { viewHistory2 } = require('../controllers/student.controller');
 
+const {viewDetails} = require('../controllers/student.controller');
+routes.get('/viewStudentDetails',viewDetails);
 
 routes.get('/viewTeacher', viewTeacher);
 routes.get('/viewstudents', viewStudent);

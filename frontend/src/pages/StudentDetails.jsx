@@ -11,17 +11,17 @@ const useStyles = createUseStyles({
                         <th className={classes.th}>History of Present Condition</th>
                         <td className={classes.td}>{studentData.info.historyOfPresentCondition[0].description}</td>
                     </tr>*/
-            //       <h4 className={classes.title}>History of Present Condition</h4>
-            //     <table className={classes.table}>
-            //       <tbody>
-            //         {studentData.info.historyOfPresentCondition.map((item, index) => (
-            //             <tr key={index}>
-            //                 <th className={classes.td}>Condition {index + 1}</th>
-            //                 <td className={classes.td}>{item.description}</td>
-            //             </tr>
-            //         ))}
-            //       </tbody>
-            //    </table>
+        //       <h4 className={classes.title}>History of Present Condition</h4>
+        //     <table className={classes.table}>
+        //       <tbody>
+        //         {studentData.info.historyOfPresentCondition.map((item, index) => (
+        //             <tr key={index}>
+        //                 <th className={classes.td}>Condition {index + 1}</th>
+        //                 <td className={classes.td}>{item.description}</td>
+        //             </tr>
+        //         ))}
+        //       </tbody>
+        //    </table>
 
         flexDirection: 'column',
         width: '100%',
@@ -124,6 +124,7 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
+        marginLeft: "1rem"
     },
 }
 const footerStyles = {
@@ -142,7 +143,7 @@ const footerStyles = {
 };
 const Student = () => {
     const classes = useStyles();
-    const [studentData,setStdentData] = useState({
+    const [studentData, setStdentData] = useState({
         "info": {
             "regNo": "",
             "regDate": {
@@ -170,7 +171,7 @@ const Student = () => {
                 }
             ]
         },
-       "presentingComplaints": {
+        "presentingComplaints": {
             "hasDysmorphicFeatures": "",
             "smallSizedHead": "",
             "ableToWalkAndRun": "",
@@ -235,7 +236,7 @@ const Student = () => {
             "nutritionalDisorders": "",
             "infections3": "",
             "significantHeadInjury": "",
-            },
+        },
         "familyHistory": {
             "typeOfFamily": "",
             "mentalRetardation": "",
@@ -302,17 +303,19 @@ const Student = () => {
     })
     const regNo = localStorage.getItem('regNo')
     console.log(regNo)
-    useEffect(()=>{
-        async function fetchStudentData(){
+    useEffect(() => {
+        async function fetchStudentData() {
             try {
                 console.log("Hello")
-                const res = await axios.get("https://niepid-final.onrender.com/student/viewDetail",{
+                const role = localStorage.getItem("role");
+                console.log(role)
+                const res = await axios.get(`http://localhost:4000/${role}/viewStudentDetails`, {
                     headers: {
                         regNo: regNo,
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
-                      }
-                    }, { withCredentials:  true }
+                    }
+                }, { withCredentials: true }
                 )
                 console.log(res.data)
                 const details = res.data
@@ -325,7 +328,7 @@ const Student = () => {
         };
         fetchStudentData();
     }
-    ,[])    //src={image}
+        , [])    //src={image}
     // const navigate = useNavigate()
     // const role = localStorage.getItem("role")
     // const Header = () => (
@@ -349,8 +352,8 @@ const Student = () => {
     //     </header>
     // );
     const navigate = useNavigate()
-    const role = localStorage.getItem("role")
     const Header = () => {
+        const role = localStorage.getItem("role")
         return (
             <>
                 <header style={styles.header}>
@@ -359,6 +362,9 @@ const Student = () => {
                         <span style={styles.logoLabel}>NIEPID</span>
                     </div>
                     <nav style={styles.navLinks}>
+                        <button onClick={handlePrint} style={styles.backButton}>
+                            Print
+                        </button>
                         <button onClick={() => {
                             if (role === "principle")
                                 navigate("/principle/viewStudents")
@@ -375,10 +381,13 @@ const Student = () => {
         );
     }
 
+    const handlePrint = (e) => {
+        window.print()
+    }
 
     return (
         <>
-            <Header/>
+            <Header />
             <form className={classes.registrationForm}>
                 <div className={classes.title}>Student Details</div>
                 <table className={classes.table}>
@@ -447,12 +456,12 @@ const Student = () => {
                             <th className={classes.th}>Therapeutic</th>
                             <td className={classes.td}>{studentData.info.therapeutic}</td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
 
 
-                
+
 
                 <div className={classes.title}>Presenting Complaints</div>
                 <table className={classes.table}>
