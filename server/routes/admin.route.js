@@ -9,7 +9,7 @@ const {viewDetails} = require('../controllers/student.controller');
 routes.get('/viewStudentDetails',viewDetails);
 
 routes.put('/updateTeacher/:id', editTeacher)
-routes.post('/registertudent', registerStudent);
+routes.post('/registerStudent', registerStudent);
 routes.post('/registerTeacher', upload.single('file'), registerTeacher);
 routes.get('/viewstudents', viewStudent);
 routes.get('/viewTeacher', viewTeacher);

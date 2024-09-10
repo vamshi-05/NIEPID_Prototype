@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import image from './th.jpeg'
+import { toast } from "react-toastify";
 
 const TeacherTable = () => {
     const [teacherDetails, setTeacherDetails] = useState([]);
@@ -39,7 +40,7 @@ const TeacherTable = () => {
                     })
             setTeacherDetails(response.data.data);
         } catch (error) {
-            console.error('Error fetching teacher details:', error.message);
+            console.error('Error fetching teacher details:', error.response);
         }
     };
 
@@ -90,7 +91,8 @@ const TeacherTable = () => {
                 console.error('Failed to update teacher details.');
             }
         } catch (error) {
-            console.error('Error updating teacher details:', error.message);
+            console.error('Error updating teacher details:', error.response);
+            toast.error(error.response.data.msg)
         }
     };
 
@@ -221,7 +223,7 @@ const TeacherTable = () => {
                                         value={editMode === teacher.teacherId ? editedTeacher.classId : teacher.classId}
                                         onChange={handleInputChange}
                                         style={styles.input}
-                                        readOnly={editMode !== teacher.teacherId}
+                                        readOnly={true}
                                     />
                                 </td>
                                 {role === "admin" ? <td style={styles.td}>

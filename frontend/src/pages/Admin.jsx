@@ -31,24 +31,26 @@ function App() {
 
             const formData = new FormData();
             formData.append('file', selectedFile);
-            console.log(formData)
+            // console.log(formData)
             let response = await axios.post('http://localhost:4000/admin/registerTeacher', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 },
             })
-                .catch(err => {
-                    console.log(err.response)
-                })
+            .catch(err => {
+                console.log(err.response)
+                setUploadStatus(`Error uploading file : `);
+            })
 
             if (response) {
+                console.log(response)
                 navigate('/admin');
                 setUploadStatus('File uploaded successfully');
             }
         } catch (error) {
-            setUploadStatus('Error uploading file');
-            console.error(error);
+            setUploadStatus(`Error uploading file : `);
+            console.error(error.response);
         }
     };
 

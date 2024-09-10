@@ -39,8 +39,8 @@ function Student() {
                 localStorage.setItem('regNo', res.data.info.regNo)
                 setFormData({
                     regNo: details.info.regNo,
-                    regDate: (details.info.regDate).toString(),
-                    dob: (details.info.dob).toString(),
+                    regDate: (details.info.regDate).toString().slice(0,10),
+                    dob: (details.info.dob).toString().slice(0,10),
                     name: details.info.name,
                     sex: details.info.sex,
                     informant: details.info.information,

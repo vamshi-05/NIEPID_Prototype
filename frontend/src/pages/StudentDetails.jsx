@@ -301,6 +301,8 @@ const Student = () => {
             "anyNegativeReactions": ""
         },
     })
+    const [registrationDate,setRegistrationDate] = useState(''); 
+    const [dateOfBirth,setDateOfBirth] = useState(''); 
     const regNo = localStorage.getItem('regNo')
     console.log(regNo)
     useEffect(() => {
@@ -317,11 +319,14 @@ const Student = () => {
                     }
                 }, { withCredentials: true }
                 )
-                console.log(res.data)
+                // console.log(res.data)
                 const details = res.data
-                // console.log(details.std)
+                const str = new Date(details.info.regDate).toISOString()
+                setRegistrationDate(str.slice(0,10));
+                const str1 = new Date(details.info.dob).toISOString()
+                setDateOfBirth(str1.slice(0,10))
                 setStdentData(details)
-                console.log("data fetched")
+                // console.log("data fetched")
             } catch (err) {
                 console.error(err)
             }
@@ -398,11 +403,13 @@ const Student = () => {
                         </tr>
                         <tr>
                             <th className={classes.th}>Registration Date</th>
-                            <td className={classes.td}>{new Date(studentData.info.regDate.$date).toLocaleDateString()}</td>
+                            {/* <td className={classes.td}>{new Date(studentData.info.regDate.$date).toLocaleDateString()}</td> */}
+                            <td className={classes.td}>{registrationDate}</td>
                         </tr>
                         <tr>
                             <th className={classes.th}>Date of Birth</th>
-                            <td className={classes.td}>{new Date(studentData.info.dob.$date).toLocaleDateString()}</td>
+                            {/* <td className={classes.td}>{new Date(studentData.info.dob.$date).toLocaleDateString()}</td> */}
+                            <td className={classes.td}>{dateOfBirth}</td>
                         </tr>
                         <tr>
                             <th className={classes.th}>Name</th>

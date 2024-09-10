@@ -138,7 +138,6 @@ const Front = () => {
   return (
     <div style={styles.pageContainer}>
       <Header />
-
       <main style={styles.main}>
         <h1 style={styles.heading}>Functional Assessment Checklist for Programming</h1>
         <h1 style={styles.subHeading}>{section.toUpperCase()} -- Year{year} -- Term{term}</h1>

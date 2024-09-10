@@ -61,6 +61,7 @@ const Front = () => {
                 const data = res.data;
                 const sectionData = data.section.find(s => s.sec === section);
                 const yearData = sectionData.yearReport.find(y => y.year === year);
+                // const termData = yearData.termReport.find(t => t.term === term);
                 console.log(yearData)
 
                 if (yearData.termReport.length == 4) {
