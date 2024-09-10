@@ -3,7 +3,19 @@ const app=express();
 const jwt=require('jsonwebtoken')
 const cors=require('cors')
 
-app.use(cors()) 
+// app.use(cors()) 
+
+const allowedOrigins = ['https://niepid-presentation.vercel.app', 'http://localhost:3000'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}))
 
 //Routes
 const studentRoutes=require('./routes/student.route')
