@@ -26,7 +26,7 @@ export default function Home() {
 
     const teacherId = localStorage.getItem("userId")
     console.log("hiiii")
-    axios.get('https://niepid.onrender.com/teacher/getStudents', {
+    axios.get('https://niepid-yrdn.onrender.com/teacher/getStudents', {
       headers: {
         id: teacherId,
         // id:"t2",
@@ -47,7 +47,7 @@ export default function Home() {
     // setStudents(groupedStudents);
     // console.log(students)
 
-    axios.get('https://niepid.onrender.com/teacher/getTeacher', {
+    axios.get('https://niepid-yrdn.onrender.com/teacher/getTeacher', {
       headers: {
         id: teacherId,
         // id:"t2",

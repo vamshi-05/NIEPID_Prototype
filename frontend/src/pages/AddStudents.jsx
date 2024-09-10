@@ -517,7 +517,7 @@ function AddStudents() {
         const answer = window.confirm("are you sure you want to submit ?");
         if (answer) {
             try {
-                await axios.post('https://niepid.onrender.com/admin/registerStudent', { formData }, {
+                await axios.post('https://niepid-yrdn.onrender.com/admin/registerStudent', { formData }, {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${localStorage.getItem("token")}`,

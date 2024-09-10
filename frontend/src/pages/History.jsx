@@ -139,7 +139,7 @@ const StudentPerformance = () => {
         console.log("hello")
         if (role === "teacher") {
             console.log("hello")
-            await axios.get("https://niepid.onrender.com/teacher/abc", {
+            await axios.get("https://niepid-yrdn.onrender.com/teacher/abc", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
@@ -166,7 +166,7 @@ const StudentPerformance = () => {
         else if (role === "principle") {
             console.log(role)
             console.log(id)
-            axios.get("https://niepid.onrender.com/principle/student/viewHistory", {
+            axios.get("https://niepid-yrdn.onrender.com/principle/student/viewHistory", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const StudentPerformance = () => {
                 })
         }
         else if (role === "admin") {
-            axios.get("https://niepid.onrender.com/admin/student/viewHistory", {
+            axios.get("https://niepid-yrdn.onrender.com/admin/student/viewHistory", {
                 headers: {
                     id: id,
                     "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const StudentPerformance = () => {
             console.log("student")
             const id1 = localStorage.getItem('regNo')
             console.log(id1)
-            axios.get("https://niepid.onrender.com/student/viewHistory", {
+            axios.get("https://niepid-yrdn.onrender.com/student/viewHistory", {
                 headers: {
                     id: id1,
                     "Content-Type": "application/json",

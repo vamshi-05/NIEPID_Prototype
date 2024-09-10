@@ -21,7 +21,7 @@ const TeacherTable = () => {
 
     const fetchData = async () => {
         try {
-            const response = role === "admin" ? await axios.get('https://niepid.onrender.com/admin/viewTeacher', {
+            const response = role === "admin" ? await axios.get('https://niepid-yrdn.onrender.com/admin/viewTeacher', {
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem("token")}`
@@ -29,7 +29,7 @@ const TeacherTable = () => {
             },
                 {
                     withCredentials: true
-                }) : await axios.get('https://niepid.onrender.com/principle/viewTeacher', {
+                }) : await axios.get('https://niepid-yrdn.onrender.com/principle/viewTeacher', {
                     headers: {
                         'Content-Type': 'application/json',
                         authorization: `Bearer ${localStorage.getItem("token")}`
@@ -62,7 +62,7 @@ const TeacherTable = () => {
             }
 
             const response = await axios.put(
-                `https://niepid.onrender.com/admin/updateTeacher/${id}`,
+                `https://niepid-yrdn.onrender.com/admin/updateTeacher/${id}`,
                 updatedTeacher,
                 {
                     headers: {

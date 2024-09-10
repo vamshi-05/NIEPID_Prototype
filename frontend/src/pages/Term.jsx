@@ -13,7 +13,7 @@ const Term = () => {
     const fetchStudentData = async () => {
       try {
         const id = localStorage.getItem("studentId");
-        const res = await axios.get("https://niepid.onrender.com/teacher/getStudentbyId", {
+        const res = await axios.get("https://niepid-yrdn.onrender.com/teacher/getStudentbyId", {
           headers: {
             id: id,
             "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Term = () => {
       setYears([]);
       localStorage.setItem("section", section);
       const id = localStorage.getItem("studentId");
-      const res = await axios.get("https://niepid.onrender.com/teacher/getStudentbyId", {
+      const res = await axios.get("https://niepid-yrdn.onrender.com/teacher/getStudentbyId", {
         headers: {
           id: id,
           "Content-Type": "application/json",

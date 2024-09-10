@@ -311,7 +311,7 @@ const Student = () => {
                 console.log("Hello")
                 const role = localStorage.getItem("role");
                 console.log(role)
-                const res = await axios.get(`https://niepid.onrender.com/${role}/viewStudentDetails`, {
+                const res = await axios.get(`https://niepid-yrdn.onrender.com/${role}/viewStudentDetails`, {
                     headers: {
                         regNo: regNo,
                         "Content-Type": "application/json",

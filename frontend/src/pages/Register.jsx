@@ -21,7 +21,7 @@ function Register() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://niepid.onrender.com/register",
+        "https://niepid-yrdn.onrender.com/register",
         {
           ...values,
         },

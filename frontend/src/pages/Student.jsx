@@ -27,7 +27,7 @@ function Student() {
         const fetchStudentData = async () => {
             try {
                 console.log("hello")
-                const res = await axios.get("https://niepid.onrender.com/student/viewStudentDetails", {
+                const res = await axios.get("https://niepid-yrdn.onrender.com/student/viewStudentDetails", {
                     headers: {
                         regNo: regNo,
                         "Content-Type": "application/json",

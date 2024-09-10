@@ -20,7 +20,7 @@ function Class() {
         navigate("/login");
       } else {
         const { data } = await axios.post(
-          "https://niepid.onrender.com/class",
+          "https://niepid-yrdn.onrender.com/class",
           {},
           {
             withCredentials: true,
@@ -44,7 +44,7 @@ function Class() {
   async function getDetails() {
     try {
       await axios
-        .post("https://niepid.onrender.com/getassignedstudents", {}, {
+        .post("https://niepid-yrdn.onrender.com/getassignedstudents", {}, {
           withCredentials: true,
         })
         .then((response) => {
@@ -74,7 +74,7 @@ function Class() {
       formData.append("file", selectedFile);
       let response;
       response = await axios.post(
-        "https://niepid.onrender.com/addstudents",
+        "https://niepid-yrdn.onrender.com/addstudents",
         formData,
         {
           headers: {
