@@ -20,7 +20,7 @@ function Class() {
         navigate("/login");
       } else {
         const { data } = await axios.post(
-          "http://localhost:4000/class",
+          "https://niepid.onrender.com/class",
           {},
           {
             withCredentials: true,
@@ -44,7 +44,7 @@ function Class() {
   async function getDetails() {
     try {
       await axios
-        .post("http://localhost:4000/getassignedstudents", {}, {
+        .post("https://niepid.onrender.com/getassignedstudents", {}, {
           withCredentials: true,
         })
         .then((response) => {
@@ -74,7 +74,7 @@ function Class() {
       formData.append("file", selectedFile);
       let response;
       response = await axios.post(
-        "http://localhost:4000/addstudents",
+        "https://niepid.onrender.com/addstudents",
         formData,
         {
           headers: {

@@ -27,7 +27,7 @@ function Student() {
         const fetchStudentData = async () => {
             try {
                 console.log("hello")
-                const res = await axios.get("http://localhost:4000/student/viewStudentDetails", {
+                const res = await axios.get("https://niepid.onrender.com/student/viewStudentDetails", {
                     headers: {
                         regNo: regNo,
                         "Content-Type": "application/json",
@@ -39,8 +39,8 @@ function Student() {
                 localStorage.setItem('regNo', res.data.info.regNo)
                 setFormData({
                     regNo: details.info.regNo,
-                    regDate: (details.info.regDate).toString().slice(0,10),
-                    dob: (details.info.dob).toString().slice(0,10),
+                    regDate: (details.info.regDate).toString().slice(0, 10),
+                    dob: (details.info.dob).toString().slice(0, 10),
                     name: details.info.name,
                     sex: details.info.sex,
                     informant: details.info.information,

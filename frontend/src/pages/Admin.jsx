@@ -32,16 +32,16 @@ function App() {
             const formData = new FormData();
             formData.append('file', selectedFile);
             // console.log(formData)
-            let response = await axios.post('http://localhost:4000/admin/registerTeacher', formData, {
+            let response = await axios.post('https://niepid.onrender.com/admin/registerTeacher', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 },
             })
-            .catch(err => {
-                console.log(err.response)
-                setUploadStatus(`Error uploading file : `);
-            })
+                .catch(err => {
+                    console.log(err.response)
+                    setUploadStatus(`Error uploading file : `);
+                })
 
             if (response) {
                 console.log(response)
@@ -57,33 +57,33 @@ function App() {
 
     const handleDownloadTeachers = async () => {
         // try {
-            // console.log("Attempting to download file");
-            // console.log(`Bearer ${localStorage.getItem("token")}`);
+        // console.log("Attempting to download file");
+        // console.log(`Bearer ${localStorage.getItem("token")}`);
 
-            const response = await axios.get('http://localhost:4000/admin/download', {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-                responseType: 'blob', // Important
-                maxRedirects: 0, // Do not follow redirects
-            });
+        const response = await axios.get('https://niepid.onrender.com/admin/download', {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            responseType: 'blob', // Important
+            maxRedirects: 0, // Do not follow redirects
+        });
 
-            console.log(response)
+        console.log(response)
 
-            // Check if the response status is 200 OK
-            if (response.status === 200) {
-                // Create a URL for the file
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', 'sampleDataTeacher.xlsx'); // Change 'sampleDataTeacher.xlsx' to the name you want
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link); // Cleanup the DOM
-            } else {
-                console.error(`Unexpected response status: ${response.status}`);
-            }
+        // Check if the response status is 200 OK
+        if (response.status === 200) {
+            // Create a URL for the file
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'sampleDataTeacher.xlsx'); // Change 'sampleDataTeacher.xlsx' to the name you want
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link); // Cleanup the DOM
+        } else {
+            console.error(`Unexpected response status: ${response.status}`);
+        }
         // } catch (error) {
         //     console.error('Error downloading the file', error);
         // }

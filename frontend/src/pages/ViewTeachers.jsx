@@ -21,7 +21,7 @@ const TeacherTable = () => {
 
     const fetchData = async () => {
         try {
-            const response = role === "admin" ? await axios.get('http://localhost:4000/admin/viewTeacher', {
+            const response = role === "admin" ? await axios.get('https://niepid.onrender.com/admin/viewTeacher', {
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem("token")}`
@@ -29,7 +29,7 @@ const TeacherTable = () => {
             },
                 {
                     withCredentials: true
-                }) : await axios.get('http://localhost:4000/principle/viewTeacher', {
+                }) : await axios.get('https://niepid.onrender.com/principle/viewTeacher', {
                     headers: {
                         'Content-Type': 'application/json',
                         authorization: `Bearer ${localStorage.getItem("token")}`
@@ -62,7 +62,7 @@ const TeacherTable = () => {
             }
 
             const response = await axios.put(
-                `http://localhost:4000/admin/updateTeacher/${id}`,
+                `https://niepid.onrender.com/admin/updateTeacher/${id}`,
                 updatedTeacher,
                 {
                     headers: {
@@ -108,7 +108,7 @@ const TeacherTable = () => {
     };
     //navigate('/principle')108
 
-    const handlePrint = (e) =>{
+    const handlePrint = (e) => {
         window.print()
     }
 
@@ -236,7 +236,7 @@ const TeacherTable = () => {
                 </table>
             </div>
             <div style={styles.print}>
-                <button onClick={handlePrint}  style={styles.backButton}>
+                <button onClick={handlePrint} style={styles.backButton}>
                     Print
                 </button>
             </div>
@@ -350,10 +350,10 @@ const styles = {
         cursor: "pointer",
         transition: "background-color 0.3s, transform 0.3s",
     },
-    print:{
-            display:"flex",
-            justifyContent:"center",
-            marginBottom:"1rem",
+    print: {
+        display: "flex",
+        justifyContent: "center",
+        marginBottom: "1rem",
     }
 };
 

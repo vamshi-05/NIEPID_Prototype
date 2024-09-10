@@ -51,7 +51,7 @@ const Front = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/teacher/getStudentbyId", {
+                const res = await axios.get("https://niepid.onrender.com/teacher/getStudentbyId", {
                     headers: {
                         id: id,
                         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Front = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post("http://localhost:4000/teacher/yearTypeComment", {
+            await axios.post("https://niepid.onrender.com/teacher/yearTypeComment", {
                 id: id,
                 section: section,
                 year: year,

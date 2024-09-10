@@ -10,25 +10,25 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     const role = localStorage.getItem("role")
-    if(role==="admin"){
+    if (role === "admin") {
       //navigate('/admin', { replace: true });
       //navigate("/admin");
       window.open('/admin', '_self');
       return;
     }
-    else if(role==="teacher"){
+    else if (role === "teacher") {
       window.open('/teacher', '_self');
       return;
     }
-    else if(role==="student"){
+    else if (role === "student") {
       window.open('/student', '_self');
       return;
     }
-    else if(role==="principle"){
+    else if (role === "principle") {
       window.open('/principle', '_self');
       return;
     }
-    else{
+    else {
       // generateError("Invalid Credentials");
     }
     if (cookies.jwt) {
@@ -47,7 +47,7 @@ function Login() {
       const id = values.id
       const password = values.password
       console.log(id, password)
-      const response = await axios.post("http://localhost:4000/login",
+      const response = await axios.post("https://niepid.onrender.com/login",
         {
           id: id,
           password: password

@@ -198,7 +198,7 @@ const Personal = () => {
         // console.log(year, currYear)
         // console.log(section, currSection)
         // console.log(id)
-        const data = await axios.get("http://localhost:4000/teacher/evaluate/questions", {
+        const data = await axios.get("https://niepid.onrender.com/teacher/evaluate/questions", {
             headers: {
                 id: id,
                 "Content-Type": "application/json",
@@ -282,7 +282,7 @@ const Personal = () => {
         };
         // console.log('Submitting data:', submissionData);
         const id = localStorage.getItem("studentId")
-        await axios.post("http://localhost:4000/teacher/eval/form", {
+        await axios.post("https://niepid.onrender.com/teacher/eval/form", {
             type: "personalQA",
             id: id,
             section: section,
@@ -302,7 +302,7 @@ const Personal = () => {
                 console.log(err.response)
             })
 
-        axios.get("http://localhost:4000/teacher/evaluate", {
+        axios.get("https://niepid.onrender.com/teacher/evaluate", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -330,7 +330,7 @@ const Personal = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:4000/teacher/termTypeComment", {
+        axios.post("https://niepid.onrender.com/teacher/termTypeComment", {
             section: section,
             year: year,
             term: term,

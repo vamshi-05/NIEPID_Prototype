@@ -301,8 +301,8 @@ const Student = () => {
             "anyNegativeReactions": ""
         },
     })
-    const [registrationDate,setRegistrationDate] = useState(''); 
-    const [dateOfBirth,setDateOfBirth] = useState(''); 
+    const [registrationDate, setRegistrationDate] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
     const regNo = localStorage.getItem('regNo')
     console.log(regNo)
     useEffect(() => {
@@ -311,7 +311,7 @@ const Student = () => {
                 console.log("Hello")
                 const role = localStorage.getItem("role");
                 console.log(role)
-                const res = await axios.get(`http://localhost:4000/${role}/viewStudentDetails`, {
+                const res = await axios.get(`https://niepid.onrender.com/${role}/viewStudentDetails`, {
                     headers: {
                         regNo: regNo,
                         "Content-Type": "application/json",
@@ -322,9 +322,9 @@ const Student = () => {
                 // console.log(res.data)
                 const details = res.data
                 const str = new Date(details.info.regDate).toISOString()
-                setRegistrationDate(str.slice(0,10));
+                setRegistrationDate(str.slice(0, 10));
                 const str1 = new Date(details.info.dob).toISOString()
-                setDateOfBirth(str1.slice(0,10))
+                setDateOfBirth(str1.slice(0, 10))
                 setStdentData(details)
                 // console.log("data fetched")
             } catch (err) {
