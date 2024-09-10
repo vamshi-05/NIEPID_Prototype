@@ -391,7 +391,7 @@ const downloadExcel = async (req, res) => {
     console.log("hii")
     const file = await path.join(__dirname, '..', 'samplesheets', 'sampleDataTeacher.xlsx'); // Adjust the path to your file
     console.log("File path:", file); // Log the file path for debugging
-    res.setHeader('Access-Control-Allow-Origin', 'https://niepid-frontend.onrender.com'); // Set the CORS header for this route
+    res.setHeader('Access-Control-Allow-Origin', 'https://niepid-prototype.vercel.app/'); // Set the CORS header for this route
     res.download(file, (err) => {
         if (err) {
             console.error("File not found:", err);
